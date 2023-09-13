@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Number Finder</title>
+    <script>
+        function isPrime(num) {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+
+            if (num % 2 === 0 || num % 3 === 0) return false;
+
+            for (let i = 5; i * i <= num; i += 6) {
+                if (num % i === 0 || num % (i + 2) === 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function findPrimes() {
+            const limit = parseInt(document.getElementById('limit').value);
+            const primeList = [];
+
+            for (let i = 2; i <= limit; i++) {
+                if (isPrime(i)) {
+                    primeList.push(i);
+                }
+            }
+
+            document.getElementById('result').innerHTML = "Prime numbers up to " + limit + ": " + primeList.join(', ');
+        }
+    </script>
+</head>
+<body>
+    <h1>Prime Number Finder</h1>
+    <p>Enter a number to find all prime numbers up to that number:</p>
+    <input type="number" id="limit" placeholder="Enter a number">
+    <button onclick="findPrimes()">Find Primes</button>
+    <p id="result"></p>
+</body>
+</html>
